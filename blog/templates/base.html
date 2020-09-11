@@ -94,6 +94,11 @@
                         <circle cx="12" cy="13" r="4" /></svg>
                     <strong>hansai's Blog</strong>
                 </a>
+                <div class="p-2 bd-highlight" align="right">
+                    {% if user.is_authenticated %}
+                        <div class="navbar-text">{{user.username}}님이 로그인 중입니다.</div>
+                    {% endif %}
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

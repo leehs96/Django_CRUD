@@ -2,6 +2,8 @@
 
 
 {% block content %}
+<!--font Awesome CDN-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   <!-- Page Content -->
   <div class="container">
 
@@ -41,7 +43,32 @@
         <p class="lead">{{post.body}}</p>
 
         <hr>
-          <div align="right">
+        <div align="left">
+         <div class="card my-4">
+          <div class="card-header">
+            {% if user.is_authenticated %}
+              {% if user in post.like_users.all %}
+                <a href="{% url 'like' post.id %}"><i class="fas fa-heart"></i></a>
+              {% else %}
+                <a href="{% url 'like' post.id %}"><i class="far fa-heart"></i></a>
+              {% endif %}
+                <!--like user count-->
+                {{ post.like_users.count }}명이 좋아합니다.<br><br>
+                    
+            {% else %}
+            <i class="far fa-heart"></i> {{ post.like_users.count }}명이 좋아합니다.
+            <br>좋아요를 누르려면 로그인이 필요합니다.
+              
+            {% endif %}
+
+            {% for likeuser in post.like_users.all %}
+              {{likeuser.username}}
+            {% endfor %}
+          </div>
+        </div>
+
+        </div>
+        <div align="right">
           <a href="{% url 'edit' post.id %}" class="btn btn-primary my-2">Edit</a>
           <a href="{%url 'delete' post.id %}" class="btn btn-primary my-2">Delete</a>
         </div>
@@ -130,7 +157,7 @@
 
         <!-- Side Widget -->
         <div class="card my-4">
-          <h5 class="card-header">심심해서 남겨두는 Widget</h5>
+          <h5 class="card-header">오 쒯 금요일이다 미쳤다</h5>
           <div class="card-body">
             You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
           </div>

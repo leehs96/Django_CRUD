@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 
 {% block content %}
@@ -9,9 +11,22 @@
         <h1>Hansai's Blog</h1>
         <p class="lead text-muted">This is myblogproject</p>
         <p>
+        
             <br>
-            <a href="{%url 'new' %}" class="btn btn-primary my-2">Add Post</a>
-            <a href = "{%url 'create10' %}" class = "btn btn-secondary my-2">create 10 Post</a>
+            
+           
+
+            {% if user.is_authenticated %}
+             <a href = "{%url 'create10' %}" class = "btn btn-secondary my-2">create 10 Post</a>
+            <a href="{%url 'new' %}" class="btn btn-info my-2">Add Post</a>
+            <a href="/accounts/logout" class="btn btn-danger my-2">로그아웃</a><br>
+            {{user.username}} 님이 로그인 중
+
+            {% else %}
+            <a href="/accounts/signup" class = "btn btn-primary my-2">회원가입</a>
+            <a href="/accounts/login" class="btn btn-secondary my-2">Login</a>
+            <a href="{% provider_login_url 'google' %}" class = "btn btn-secondary my-2">Login with google</a><br>
+            {% endif %}
         </p>
     </div>
 </section>
